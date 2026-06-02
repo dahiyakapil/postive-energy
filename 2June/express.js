@@ -23,6 +23,6 @@ app.delete("/users/delete", (req, res) => {
 })
 
 
-app.listen(3000, (req, res) => {
+app.listen(3000, () => {
     console.log("Sever running on Port : 3000" )
 })
