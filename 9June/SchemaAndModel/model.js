@@ -24,6 +24,38 @@ const userSchema = new mongoose.Schema({
 })
 
 const User = mongoose.model("User", userSchema);
-module.exports = User;
 
 console.log(User);
+
+// Creating the BASIC CRUD APIs using model
+
+async function createUser() {
+    const newUser = await User.create({
+        name:"Kapil",
+        email:"kapil2@gmail.com"
+    })
+    console.log(newUser);
+}
+
+async function getAllUsers(){
+    const users = await User.find();
+    console.log(users);
+}
+
+async function filteringGetOnlyKapil() {
+    const user = await User.find({name:"Kapil"});
+    console.log(user);
+}
+
+
+// If there are many users with the same name then use the findOne it will return the first match document
+
+async function getFirstMatchDocument(){
+    const user = await User.findOne({name:"Kapil"})
+    console.log(user);
+}
+
+// createUser();
+// getAllUsers();
+// filteringGetOnlyKapil();
+getFirstMatchDocument();
