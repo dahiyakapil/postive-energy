@@ -55,7 +55,59 @@ async function getFirstMatchDocument(){
     console.log(user);
 }
 
+
+// 10 June
+// Internally uses findOne({_id : id}) 
+async function getDocumentUsingFindByID(){
+    const id = "6a2803dca13b38cbf82b0910";
+    const user = await User.findById(id); 
+    console.log(user);
+}
+
+// findByIdAndUpdate: in this $set is optional to use
+// Method 1 With $set, as $set is optional to use internally Mongoose convert shortcut method to $set
+async function updateUser() {
+    const id = "6a2803dca13b38cbf82b0910";
+    const user = await User.findByIdAndUpdate(
+        id,
+        {
+            $set:{
+                role:"Admin"
+            }
+        },
+        {
+            new: true
+        }
+
+    )
+    console.log(user);
+}
+
+// Method 2: Cleaner way without $set, as updateOne use _id code block and $set boiler plate code, mongoose removes that boiler plate code to make the code cleaner
+async function updateUser(){
+    const id = "6a2803dca13b38cbf82b0910";
+    const user = await User.findByIdAndUpdate(
+        id, 
+        {
+            role:"Admin"
+        },
+        {
+            new: true
+        }
+    )
+    console.log(user);
+}
+
+async function deleteUser() {
+    const id = "6a2805390bb9714aedb5670b";
+    const user = await User.findByIdAndDelete(id);
+    console.log(user)
+}
+
 // createUser();
 // getAllUsers();
 // filteringGetOnlyKapil();
-getFirstMatchDocument();
+// getFirstMatchDocument();
+// getDocumentUsingFindByID();
+// updateUser()
+// deleteUser();
