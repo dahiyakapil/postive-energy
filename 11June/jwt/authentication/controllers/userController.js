@@ -77,7 +77,8 @@ const login = async (req, res, next) => {
         // after password is compared and match generate a jwt token
         const token = jwt.sign(
             {
-                userId: user._id
+                userId: user._id,
+                role: user.role
             },
             JWT_SECRET,
             {
@@ -226,11 +227,25 @@ const changePassword = async (req, res, next) => {
     }
 }
 
+
+// RBAC Admin Dashboard Authorization Access
+const adminDashboard = async (req, res, next) => {
+    try {
+        res.status(200).json({
+            message: "Welcome Admin",
+            success: true
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     register,
     login,
     getProfile,
     getMe,
     updateProfile,
-    changePassword
+    changePassword,
+    adminDashboard
 }
