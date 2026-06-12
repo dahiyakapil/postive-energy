@@ -42,6 +42,16 @@ userSchema.pre("save", async function () {
     );
 });
 
+// Compare plain text password and hash password if match then generate new JWT token
+userSchema.methods.comparePassword =
+    function (password) {
+
+        return bcrypt.compare(
+            password,
+            this.password
+        );
+
+    }
 
 
 const User = mongoose.model("User", userSchema);
